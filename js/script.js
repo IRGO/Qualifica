@@ -17,6 +17,17 @@ document.addEventListener("DOMContentLoaded", function () {
       field.classList.remove("invalid");
     });
   });
+
+  // Ajuste automático do iframe ao conteúdo
+  const iframe = document.getElementById("formulario-iframe");
+  if (iframe) {
+    window.addEventListener("message", (event) => {
+      if (event.origin.includes("google.com") && event.data && typeof event.data === "string") {
+        const match = event.data.match(/^\d+$/);
+        if (match) {
+          iframe.style.height = `${event.data}px`;
+        }
+      }
+    });
+  }
 });
-
-
